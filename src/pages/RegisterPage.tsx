@@ -6,7 +6,7 @@ import './Home.css';
 
 const RegisterForm: React.FC = () => {
 
-    const [form, setForm] = useState({
+    const [form, setForm] = useState({  // State to hold values of input fields.
         firstName : "",
         lastName : "",
         username : "",
@@ -19,21 +19,21 @@ const RegisterForm: React.FC = () => {
     const history = useHistory();
 
     useEffect(() => {
-      if(!localStorage.getItem("user")){
+      if(localStorage.getItem("user")){ // If user is present in local storage, redirect to home page.
         history.push("/");
       }
     }, []);
 
-    const updateForm = (e:any) => {
+    const updateForm = (e:any) => { // Update state when each input field is changed.
         setForm({...form, [e.currentTarget.name]:e.currentTarget.value})
     }
     
-    const updateCheckbox = (e:any) => {
+    const updateCheckbox = (e:any) => { // Update state when check box is changed.
         let newValue = !form.userAuditor;
         setForm({...form, [e.currentTarget.name]:newValue});
     }
     
-    let formSubmitAction = async(e:any) => {
+    let formSubmitAction = async(e:any) => {  // Form submission operation.
         e.preventDefault();
         let response  = await fetch("http://localhost:4000/users/register",{
             method : 'POST',
@@ -46,7 +46,6 @@ const RegisterForm: React.FC = () => {
         response = await response.json();
         setToastMessage(response.toString());
         setShowToast(true);
-    
     }
 
     return (
@@ -99,7 +98,7 @@ const RegisterForm: React.FC = () => {
              <IonRow>
                 <IonCol>
                   <IonLabel>Auditor Powers : </IonLabel>
-                  <IonCheckbox onIonChange={updateCheckbox}/>
+                  <IonCheckbox name = "userAuditor" onIonChange={updateCheckbox}/>
                 </IonCol>
              </IonRow>
              <IonRow class = "ion-justify-content-center">

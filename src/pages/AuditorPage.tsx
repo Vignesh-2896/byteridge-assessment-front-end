@@ -35,7 +35,7 @@ const AuditorPage: React.FC = () => {
             </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
-              {user &&
+              {user &&  // Auditor Features are only for Logged in Auditor users.
                 <AuditorFeatures />
               }
             </IonContent>

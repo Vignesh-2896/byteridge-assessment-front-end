@@ -10,7 +10,7 @@ const Home: React.FC = () => {
   const [auditor, setAuditor] = useState(false);
 
   useEffect(() => {
-    if(localStorage.getItem("user")){
+    if(localStorage.getItem("user")){   // Find if user is present and if user is an Auditor.
       setUser(true);
       setAuditor(JSON.parse(localStorage.getItem("user")||"").userAuditor);
     }

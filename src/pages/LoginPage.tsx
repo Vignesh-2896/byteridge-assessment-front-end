@@ -37,7 +37,7 @@ const LoginForm: React.FC = () => {
             },
             body: JSON.stringify(form)
         });
-        if(response.status===400){
+        if(response.status===400){  // If incorrect credentials are present, intimate user and reset the fields.
             let errMsg = await response.json();
             setToastMessage(errMsg.message);
             setShowToast(true);
@@ -45,7 +45,7 @@ const LoginForm: React.FC = () => {
             let inputFields = document.getElementById("entryForm") as HTMLFormElement;
             inputFields.reset();
 
-        } else {
+        } else {              // If valid credentials are present, update localStorage and redirect to the home page.
             let loggedInUser =  await response.json();
             localStorage.setItem("user",JSON.stringify(loggedInUser));
             setUser(true);
